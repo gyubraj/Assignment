@@ -29,7 +29,7 @@ def convert_value(column, value):
         return int(value)
 
 
-def parse_search_phrase(allowed_list : list[str],string_query: str) -> Q:
+def parse_search_phrase(allowed_list : list[str],string_query: str):
 
     # replace multiple space with single space
     string_query = re.sub(' +',' ',string_query)
@@ -100,10 +100,6 @@ def parse_search_phrase(allowed_list : list[str],string_query: str) -> Q:
                     check: convert_value(field, value)
                 }
                 query_list.append(Q(**condition))
-           
-        # else:
-        #     others = split_query.pop(0)
-        #     query_list.append(others)
 
         elif split_query[0] == ")":
             while len(ops) != 0 and ops[-1] != '(':
@@ -128,56 +124,4 @@ def parse_search_phrase(allowed_list : list[str],string_query: str) -> Q:
         query_list.append(applyOp(val1, val2, op))
 
     return query_list[-1]
-
-
-# def complex_filter_by_string(tokens):
-#     """
-
-#     """
-
-#     values = []
-
-#     # stack to store operators.
-#     ops = []
-#     i = 0
-
-#     while i < len(tokens):
-
-#         # Current token is ( , OR , AND 
-#         if tokens[i] == '(' or tokens[i] == "OR" or tokens[i] == "AND":
-#             ops.append(tokens[i])
-            
-#         # Closing brace encountered,
-#         # solve entire brace.
-#         elif tokens[i] == ')':
-        
-#             while len(ops) != 0 and ops[-1] != '(':
-#                 val2 = values.pop()
-#                 val1 = values.pop()
-#                 op = ops.pop()
-                
-#                 values.append(applyOp(val1, val2, op))
-            
-#             # pop opening brace.
-#             ops.pop()
-        
-#         # This means it is Q Expression so push into values
-#         else:
-#              values.append(tokens[i])
-        
-#         i += 1
-
-
-#     # Perform remianing operations
-#     while len(ops) != 0:
-        
-#         val2 = values.pop()
-#         val1 = values.pop()
-#         op = ops.pop()
-                
-#         values.append(applyOp(val1, val2, op))
-
-#     return values[-1]
-
-
 
