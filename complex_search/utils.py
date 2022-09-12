@@ -34,17 +34,11 @@ def parse_search_phrase(allowed_list : list[str],string_query: str):
     # replace multiple space with single space
     string_query = re.sub(' +',' ',string_query)
 
-    mapping = {
-        ' eq': " = ",
-        ' ne': " != ",
-        ' gt': "__gt = ",
-        ' lt': "__lt = ",
-    }
-
-    keys = list(mapping.keys())
+    # Operators that is supported in search
+    operators = [' eq', ' ne', ' gt', ' lt']
 
     # regular expresiion to get field values from query
-    pattern = rf'(\w+)\s*(?:\b(?:{"|".join(keys)})\b)'
+    pattern = rf'(\w+)\s*(?:\b(?:{"|".join(operators)})\b)'
 
     # Gives all fields that is used in the query
     fields = set(re.findall(pattern, string_query))
