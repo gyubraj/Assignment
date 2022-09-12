@@ -43,24 +43,26 @@ queryset = MyModel.objects.filter(search_filter)
 
 4. You don't have to run migrations as I am pushing a database too for testing purpose. 
 
-5. If you want to enter data into Student model then create a superuser and login into admin panel. 
+5. If you want to enter data into Student model then create a superuser. 
 
     ```
     # In terminal 
     python manage.py createsuperuser
 
-    # Visit URL 
-    127.0.0.1:8000/admin/
-
     ```
 
 6. If you want to use already created admin account then 
     ```
-    # Goto 127.0.0.1:8000/admin/
     username = admin
     password = 1234
     ```
 
+7. Run Project and goto admin panel 
+    ```
+    python manage.py runserver 
+
+    url = 127.0.0.1:8000/admin/
+    ```
 
 ## Constraint
 
